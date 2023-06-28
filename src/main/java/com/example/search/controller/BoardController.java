@@ -1,6 +1,6 @@
 package com.example.search.controller;
 
-import com.example.search.model.Board;
+import com.example.search.document.Product;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.elasticsearch.core.ElasticsearchOperations;
 import org.springframework.data.elasticsearch.repository.config.EnableElasticsearchRepositories;
@@ -19,16 +19,16 @@ public class BoardController {
     }
 
     @PostMapping("/boards")
-    public String save(@RequestBody Board board) {
-        Board savedEntity = elasticsearchOperations.save(board);
+    public String save(@RequestBody Product product) {
+        Product savedEntity = elasticsearchOperations.save(product);
         System.out.println(savedEntity.getId());
         System.out.println(savedEntity);
         return savedEntity.getId();
     }
 
     @GetMapping("/boards/{id}")
-    public Board findById(@PathVariable("id")  String id) {
-        Board board = elasticsearchOperations.get(id, Board.class);
-        return board;
+    public Product findById(@PathVariable("id")  String id) {
+        Product product = elasticsearchOperations.get(id, Product.class);
+        return product;
     }
 }
