@@ -2,6 +2,4 @@ logging:
   level:
     org.springframework.data.elasticsearch.client.WIRE: TRACE
 
-elasticsearch.url: http://localhost:9200
-
 

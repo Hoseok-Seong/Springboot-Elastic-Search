@@ -2,12 +2,13 @@ package com.example.search.controller;
 
 import com.example.search.model.Board;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.elasticsearch.core.ElasticsearchOperations;
+import org.springframework.data.elasticsearch.repository.config.EnableElasticsearchRepositories;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
+@EnableElasticsearchRepositories
 public class BoardController {
 
     private final ElasticsearchOperations elasticsearchOperations;
@@ -18,14 +19,16 @@ public class BoardController {
     }
 
     @PostMapping("/boards")
-    public Long save(@RequestBody Board board) {
+    public String save(@RequestBody Board board) {
         Board savedEntity = elasticsearchOperations.save(board);
+        System.out.println(savedEntity.getId());
+        System.out.println(savedEntity);
         return savedEntity.getId();
     }
 
     @GetMapping("/boards/{id}")
-    public Board findById(@PathVariable("id")  Long id) {
-        Board board = elasticsearchOperations.get(id.toString(), Board.class);
+    public Board findById(@PathVariable("id")  String id) {
+        Board board = elasticsearchOperations.get(id, Board.class);
         return board;
     }
 }
