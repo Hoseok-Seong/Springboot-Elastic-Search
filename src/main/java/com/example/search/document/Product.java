@@ -2,18 +2,19 @@ package com.example.search.document;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
-import lombok.AccessLevel;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
+import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.elasticsearch.annotations.*;
+import org.springframework.data.geo.Point;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 @Document(indexName = "products")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
 @Setter
+@ToString
 public class Product {
     @Id
     private String id;
@@ -25,10 +26,10 @@ public class Product {
     private String content;
     @Field(type = FieldType.Integer)
     private Integer price;
-    @Field(type = FieldType.Integer_Range)
-    private DiscountRate discountRate;
+    @Field(type = FieldType.Integer)
+    private Integer discountRate;
     @GeoPointField
-    private GeoPoint geoPoint;
-    @Field(type = FieldType.Date_Nanos, format = DateFormat.basic_date_time)
-    private LocalDateTime createdAt;
+    private Point location;
+    @Field(type = FieldType.Date, format = DateFormat.basic_date_time)
+    private String createdAt = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
 }

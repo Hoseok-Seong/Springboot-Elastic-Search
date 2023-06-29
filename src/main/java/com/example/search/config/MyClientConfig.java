@@ -4,10 +4,12 @@ import co.elastic.clients.transport.TransportUtils;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.elasticsearch.client.ClientConfiguration;
 import org.springframework.data.elasticsearch.client.elc.ElasticsearchConfiguration;
+import org.springframework.data.elasticsearch.repository.config.EnableElasticsearchRepositories;
 
 import javax.net.ssl.SSLContext;
 
 @Configuration
+@EnableElasticsearchRepositories(basePackages = "com.example.search.repository")
 public class MyClientConfig extends ElasticsearchConfiguration {
 
     private static final String elasticsearchServer = System.getenv("ELASTIC_URL");
