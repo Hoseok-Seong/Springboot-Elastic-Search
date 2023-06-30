@@ -3,16 +3,13 @@ package com.example.search.controller;
 import com.example.search.document.Product;
 import com.example.search.service.ProductService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.elasticsearch.core.ElasticsearchOperations;
-import org.springframework.data.elasticsearch.repository.config.EnableElasticsearchRepositories;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
-@EnableElasticsearchRepositories
 public class ProductController {
-
-    private final ElasticsearchOperations elasticsearchOperations;
 
     private final ProductService productService;
 
@@ -28,8 +25,7 @@ public class ProductController {
 
     @GetMapping("/products/{id}")
     public Product findById(@PathVariable("id")  String id) {
-        Product product = elasticsearchOperations.get(id, Product.class);
-        return product;
+        return productService.findById(id);
     }
 
     @DeleteMapping("/products")
@@ -37,8 +33,33 @@ public class ProductController {
         productService.delete(id);
     }
 
-//    @PostMapping("/products/bulk")
-//    public void bulkSave(@RequestBody Product product) {
-//        productService.bulkSave(product);
-//    }
+    @PostMapping("/products/titles")
+    public List<Product> findByTitle(String title) {
+        return productService.findByTitle(title);
+    }
+
+    @PostMapping("/products/categories")
+    public List<Product> findByCategory(String category) {
+        return productService.findByCategory(category);
+    }
+
+    @PostMapping("/products/contents")
+    public List<Product> findByContent(String content) {
+        return productService.findByContent(content);
+    }
+
+    @PostMapping("/products/TitlesAndContents")
+    public List<Product> findByTitleAndContent(String title, String content) {
+        return productService.findByTitleAndContent(title, content);
+    }
+
+    @PostMapping("/products/TitlesOrContents")
+    public List<Product> findByTitleOrContent(String title, String content) {
+        return productService.findByTitleOrContent(title, content);
+    }
+
+    @PostMapping("/products/CategoryNot")
+    public List<Product> findByCategoryNot(String category) {
+        return productService.findByCategoryNot(category);
+    }
 }

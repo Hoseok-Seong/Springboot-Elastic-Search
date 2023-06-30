@@ -1,9 +1,7 @@
 package com.example.search.document;
 
-import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import lombok.*;
-import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.elasticsearch.annotations.*;
 import org.springframework.data.geo.Point;
 

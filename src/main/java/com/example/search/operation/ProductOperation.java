@@ -21,6 +21,9 @@ public class ProductOperation {
         elasticsearchOperations.delete(id, Product.class);
     }
 
+    public Product findById(String id) { return elasticsearchOperations.get(id, Product.class);}
+
+    // 공백 포함, 순서 고려 검색
     public SearchHits<Product> titleMatchPhrase(String title) {
         Query query = NativeQuery.builder()
                 .withQuery(q -> q.matchPhrase(m -> m.field("content").query(title)))
@@ -30,6 +33,7 @@ public class ProductOperation {
         return searchHits;
     }
 
+    // 공백 포함, 순서 고려 검색
     public SearchHits<Product> contentMatchPhrase(String content) {
         Query query = NativeQuery.builder()
                 .withQuery(q -> q.matchPhrase(m -> m.field("content").query(content)))

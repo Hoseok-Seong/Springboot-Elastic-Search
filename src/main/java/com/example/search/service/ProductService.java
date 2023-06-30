@@ -1,13 +1,9 @@
 package com.example.search.service;
 
-import co.elastic.clients.elasticsearch.core.BulkRequest;
-import co.elastic.clients.elasticsearch.core.BulkResponse;
 import com.example.search.document.Product;
+import com.example.search.operation.ProductOperation;
+import com.example.search.repository.ProductRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.elasticsearch.client.elc.NativeQuery;
-import org.springframework.data.elasticsearch.core.ElasticsearchOperations;
-import org.springframework.data.elasticsearch.core.query.IndexQuery;
-import org.springframework.data.elasticsearch.core.query.Query;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -16,14 +12,43 @@ import java.util.List;
 @RequiredArgsConstructor
 public class ProductService {
 
-    private final ElasticsearchOperations elasticsearchOperations;
+    private final ProductOperation productOperation;
+
+    private final ProductRepository productRepository;
 
     public String save(Product product) {
-        Product savedEntity = elasticsearchOperations.save(product);
-        return savedEntity.toString();
+        return productOperation.save(product);
     }
 
     public void delete(String id) {
-        elasticsearchOperations.delete(id, Product.class);
+        productOperation.delete(id);
+    }
+
+    public Product findById(String id) {
+        return productOperation.findById(id);
+    }
+
+    public List<Product> findByTitle(String title) {
+        return productRepository.findByTitle(title);
+    }
+
+    public List<Product> findByCategory(String category) {
+        return productRepository.findByCategory(category);
+    }
+
+    public List<Product> findByContent(String content) {
+        return productRepository.findByContent(content);
+    }
+
+    public List<Product> findByTitleAndContent(String title, String content) {
+        return productRepository.findByTitleAndContent(title, content);
+    }
+
+    public List<Product> findByTitleOrContent(String title, String content) {
+        return productRepository.findByTitleOrContent(title, content);
+    }
+
+    public List<Product> findByCategoryNot(String category) {
+        return productRepository.findByCategoryNot(category);
     }
 }
