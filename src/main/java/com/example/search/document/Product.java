@@ -13,6 +13,8 @@ import java.time.format.DateTimeFormatter;
 @Getter
 @Setter
 @ToString
+@AllArgsConstructor
+@Builder
 public class Product {
     @Id
     private String id;
@@ -29,5 +31,5 @@ public class Product {
     @GeoPointField
     private Point location;
     @Field(type = FieldType.Date, format = DateFormat.basic_date_time)
-    private String createdAt = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+    private final String createdAt = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
 }

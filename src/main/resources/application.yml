@@ -1,3 +1,16 @@
+spring:
+  datasource:
+    url: jdbc:h2:mem:test;MODE=MySQL
+    driver-class-name: org.h2.Driver
+    username: sa
+    password:
+  jpa:
+    open-in-view: false
+    show-sql: true
+  h2:
+    console:
+      enabled: true
+
 logging:
   level:
     org.springframework.data.elasticsearch.client.WIRE: TRACE

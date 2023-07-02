@@ -2,11 +2,13 @@ package com.example.search.operation;
 
 import com.example.search.document.Product;
 import lombok.RequiredArgsConstructor;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.data.elasticsearch.client.elc.NativeQuery;
 import org.springframework.data.elasticsearch.core.query.Query;
 import org.springframework.data.elasticsearch.core.ElasticsearchOperations;
 import org.springframework.data.elasticsearch.core.SearchHits;
 
+@Configuration
 @RequiredArgsConstructor
 public class ProductOperation {
 
