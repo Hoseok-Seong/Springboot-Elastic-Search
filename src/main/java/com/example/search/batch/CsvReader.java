@@ -10,18 +10,14 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.ClassPathResource;
 
-import java.io.IOException;
-
 @Configuration
 @RequiredArgsConstructor
 public class CsvReader {
 
     @Bean
-    public FlatFileItemReader<Product> csvFileItemReader() throws IOException {
+    public FlatFileItemReader<Product> csvFileItemReader() {
         FlatFileItemReader<Product> itemReader = new FlatFileItemReader<>();
         itemReader.setResource(new ClassPathResource("csv/product.csv"));
-        itemReader.setLinesToSkip(1); // header line skip
-        itemReader.setEncoding("UTF-8"); // encoding
 
         DefaultLineMapper<Product> lineMapper = new DefaultLineMapper<>();
 
@@ -35,10 +31,6 @@ public class CsvReader {
 
         itemReader.setLineMapper(lineMapper);
 
-        System.out.println("실행됨?1");
-        System.out.println(itemReader.getName());
-        ClassPathResource fileSystemResource = new ClassPathResource("csv/product.csv");
-        System.out.println(fileSystemResource.contentLength());
         return itemReader;
     }
 }

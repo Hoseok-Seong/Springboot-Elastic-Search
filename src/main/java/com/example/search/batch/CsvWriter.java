@@ -19,10 +19,7 @@ public class CsvWriter implements ItemWriter<Product> {
 
     @Override
     public void write(@NonNull Chunk<? extends Product> chunk) {
-        System.out.println(chunk.getItems());
-        System.out.println("실행됨?2");
         jpaRepository.saveAll(chunk);
 //        this.productRepository.saveAll(chunk);
-        System.out.println("실행됨?3");
     }
 }

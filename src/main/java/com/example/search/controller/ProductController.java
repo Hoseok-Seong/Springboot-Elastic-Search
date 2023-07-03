@@ -29,37 +29,37 @@ public class ProductController {
     }
 
     @DeleteMapping("/products")
-    public void delete(String id) {
+    public void delete(@RequestBody String id) {
         productService.delete(id);
     }
 
     @PostMapping("/products/titles")
-    public List<Product> findByTitle(String title) {
+    public List<Product> findByTitle(@RequestBody String title) {
         return productService.findByTitle(title);
     }
 
     @PostMapping("/products/categories")
-    public List<Product> findByCategory(String category) {
+    public List<Product> findByCategory(@RequestBody String category) {
         return productService.findByCategory(category);
     }
 
     @PostMapping("/products/contents")
-    public List<Product> findByContent(String content) {
+    public List<Product> findByContent(@RequestBody String content) {
         return productService.findByContent(content);
     }
 
     @PostMapping("/products/TitlesAndContents")
-    public List<Product> findByTitleAndContent(String title, String content) {
+    public List<Product> findByTitleAndContent(@RequestBody String title, String content) {
         return productService.findByTitleAndContent(title, content);
     }
 
     @PostMapping("/products/TitlesOrContents")
-    public List<Product> findByTitleOrContent(String title, String content) {
+    public List<Product> findByTitleOrContent(@RequestBody String title, String content) {
         return productService.findByTitleOrContent(title, content);
     }
 
     @PostMapping("/products/CategoryNot")
-    public List<Product> findByCategoryNot(String category) {
+    public List<Product> findByCategoryNot(@RequestBody String category) {
         return productService.findByCategoryNot(category);
     }
 }
